@@ -1,11 +1,12 @@
 import openpyxl as xl
 import random
+import os
 from funktionen import random_race, random_npc_cityloc_even, npc_disappears, create_players
 from os.path import expanduser
 
 home = expanduser("~")
-day = 1
 wb = xl.load_workbook("BR New Game Blank.xlsx")
+day = 1
 player_lists = create_players(int(input("Wie viele Spieler sollen mitspielen? ")))
 player_names = player_lists[0]
 player_locs = player_lists[1]
@@ -49,17 +50,26 @@ while day <= 13:
             loc_entry.value = npc_disappears()
 
     # PC Einträge
+    race_list = []
+
     for player_name in player_names:
         name_entry = sheet.cell(sheet.max_row + 1, 1)
         name_entry.value = player_names[player_names.index(player_name)]
+        if day == 1:
+            race = random_race()
+            race_list.append(race)
         race_entry = sheet.cell(sheet.max_row, 2)
-        race_entry.value = random_race()
+        print(race_list)
+        print(player_names.index(player_name))
+        # index error
+        race_entry.value = race_list[player_names.index(player_name)]
         loc_entry = sheet.cell(sheet.max_row, 3)
         loc_entry.value = player_locs[player_names.index(player_name)]
 
     day_entry = sheet.cell(sheet.max_row + 2, 1)
     day_entry.value = f"Tag {day}"
     wb.save(f"BR Tag {day}.xlsx")
+    sheet.delete_rows(sheet.max_row - (1 + len(player_names)), sheet.max_row)
     day += 2
 
 day = 1
@@ -69,4 +79,5 @@ while day <= 13:
     sheet = wb["Tabelle1"]
     sheet.delete_cols(5)
     wb.save(f"{home}/Desktop/BR Tag {day}.xlsx")
+    os.remove(f"BR Tag {day}.xlsx")
     day += 2
