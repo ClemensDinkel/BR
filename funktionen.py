@@ -79,6 +79,30 @@ def random_npc_cityloc_even(iterations):
     return random_npc_cityloc_return_list
 
 
+def random_pc_livingloc_even(iterations):
+    import random
+    from listen import locations
+
+    loc_list = list(locations)
+    del loc_list[0]
+    del loc_list[5:]
+    tuple(loc_list)
+    loc_list_editable = list(loc_list)
+    random_pc_livingloc_return_list = []
+
+    while iterations > 0:
+        if len(loc_list_editable) != 0:
+            available_locs = len(loc_list_editable)
+            random_number = random.randint(0, available_locs - 1)
+            pc_loc = loc_list_editable[random_number]
+            random_pc_livingloc_return_list.append(pc_loc)
+            loc_list_editable.pop(random_number)
+            iterations -= 1
+        else:
+            loc_list_editable = list(loc_list)
+    return random_pc_livingloc_return_list
+
+
 def npc_disappears():
     import random
     from listen import locations

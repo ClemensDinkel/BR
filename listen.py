@@ -49,3 +49,16 @@ NPC = (
 Spieler = [
 
 ]
+
+eldon_tyrell = {"name": "Eldon Tyrell", "race": "Mensch", "location": "Tyrell Corp"}
+miranda_tyrell = {"name": "Miranda Tyrell", "race": "Replikant", "location": "Tyrell Corp"}
+NPC_Dicts = (
+    eldon_tyrell,
+    miranda_tyrell,
+
+)
+
+for char in NPC_Dicts:
+    name = char.get("name").lower()
+    name = name.replace(" ","_")
+

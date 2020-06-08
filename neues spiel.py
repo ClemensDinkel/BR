@@ -46,7 +46,7 @@ while day <= 13:
             loc_entry.value = misc_locs[random_number]
             misc_locs.pop(random_number)
             misc_count -= 1
-        if gen_check.value == "Ja wohnundkip":
+        if gen_check.value == "Ja wohn+kip":
             loc_entry.value = npc_disappears()
 
     # PC Einträge
