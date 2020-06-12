@@ -13,7 +13,7 @@ traders_count = 0
 misc_count = 0
 dissappeared_count = 0
 genlist = []
-daylist =[]
+daylist = []
 
 # Spieler Input, Eintrag in Excel
 player_count = int(input("Wie viele Spieler sollen mitspielen? "))
@@ -81,5 +81,3 @@ while day <= 13:
     sheet.delete_cols(5)
     wb.save(f"{home}/Desktop/BR Tag {day}.xlsx")
     day += 2
-eintrag = open("listen.py", "a")
-eintrag.writelines(daylist)
