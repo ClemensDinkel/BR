@@ -3,7 +3,6 @@ import random
 from funktionen import random_id, random_npc_cityloc_even, npc_disappears, random_pc_livingloc_even
 from os.path import expanduser
 
-
 home = expanduser("~")
 wb = xl.load_workbook("BR New Game Blank.xlsx")
 sheet = wb["Tabelle1"]
