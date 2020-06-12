@@ -13,6 +13,7 @@ traders_count = 0
 misc_count = 0
 dissappeared_count = 0
 genlist = []
+daylist =[]
 
 # Spieler Input, Eintrag in Excel
 player_count = int(input("Wie viele Spieler sollen mitspielen? "))
@@ -30,6 +31,7 @@ while day <= 13:
     sheet = wb["Tabelle1"]
     day_entry = sheet.cell(1, 1)
     day_entry.value = f"Tag {day}"
+    charlist = []
 
     # Personengruppen werden gezählt. Wdh nötig, da counts bei Zuweisung von Locations auf 0 gesetzt werden.
     for row2 in range(4, sheet.max_row + 1):
@@ -53,7 +55,6 @@ while day <= 13:
         gen_check = sheet.cell(row, 5)
         if genlist[row - 4] != "Nein" and day == 1:
             id_entry.value = random_id()
-
         if genlist[row - 4] == "Ja stadt 1" and day == 1:
             random_number = random.randint(1, traders_count) - 1
             loc_entry.value = traders_locs[random_number]
@@ -72,7 +73,13 @@ while day <= 13:
         if genlist[row - 4] == "Ja wohn+kip":
             loc_entry.value = npc_disappears()
 
+        char = {"name": name_entry.value, "id": id_entry.value, "location": loc_entry.value}
+        charlist.append(char)
+    daylist.append(charlist)
+
     # letzte Modifikationen für die Ausgabe
     sheet.delete_cols(5)
     wb.save(f"{home}/Desktop/BR Tag {day}.xlsx")
     day += 2
+eintrag = open("listen.py", "a")
+eintrag.writelines(daylist)
